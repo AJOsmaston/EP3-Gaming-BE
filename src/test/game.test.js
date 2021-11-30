@@ -47,4 +47,17 @@ describe('Game', () => {
 
   });
 
+  describe('#checkDead', () => {
+    it('returns false if health > 0', () => {
+      expect(this.newGame.checkDead()).toBe(false);
+    });
+
+    it('returns true if health <= 0', () => {
+      jest.spyOn(global.Math, 'random').mockReturnValue(1);
+      this.newGame.takeDamage();
+
+      expect(this.newGame.health).toBe(0);
+      expect(this.newGame.checkDead()).toBe(true);
+    });
+  });
 });
