@@ -45,6 +45,6 @@ describe('Game', () => {
       expect(this.newGame.health).toBe(80);
     });
 
-  })
+  });
 
 });

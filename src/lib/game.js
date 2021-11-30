@@ -1,19 +1,19 @@
 class Game {
   constructor() {
-    this.score = 0 //player score
-    this.health = 100 //player health
+    this.score = 0; //player score
+    this.health = 100; //player health
   }
 
   attack() {
-    this.score += this.#randomNumber()
+    this.score += this.#randomNumber();
   }
 
   takeDamage() {
-    this.health -= this.#randomNumber()
+    this.health -= this.#randomNumber();
   }
 
   #randomNumber() {
-    return Math.floor(Math.random()*100)
+    return Math.floor(Math.random()*100);
   }
 
 }
