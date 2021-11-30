@@ -12,6 +12,10 @@ class Game {
     this.health -= this.#randomNumber();
   }
 
+  checkDead() {
+    return this.health <= 0 ? true : false
+  }
+
   #randomNumber() {
     return Math.floor(Math.random()*100);
   }
