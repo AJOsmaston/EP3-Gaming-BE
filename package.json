@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ./",
+    "lint": "eslint ./src/lib",
     "test": "jest -i --verbose --coverage --runInBand",
     "start": "node ./src/lib/server.js",
     "dboff": "killall mongod",
