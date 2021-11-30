@@ -5,6 +5,7 @@ describe('Game', () => {
 
   beforeEach(() => {
     this.newGame = new Game();
+    jest.spyOn(global.Math, 'random').mockRestore()
   });
 
   describe('#score', () => {
@@ -27,4 +28,23 @@ describe('Game', () => {
       expect(this.newGame.score).toBe(10);
     });
   });
+
+
+  describe('#damage', () => {
+
+    it('decreases player health', () => {
+      this.newGame.takeDamage();
+  
+      expect(this.newGame.health).toBeLessThan(100);
+    })
+
+    it('decreases players health by a random amount', () => {
+      jest.spyOn(global.Math, 'random').mockReturnValue(0.2);
+      this.newGame.takeDamage();
+
+      expect(this.newGame.health).toBe(80);
+    });
+
+  })
+
 });

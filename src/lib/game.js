@@ -1,10 +1,15 @@
 class Game {
   constructor() {
-    this.score = 0
+    this.score = 0 //player score
+    this.health = 100 //player health
   }
 
   attack() {
     this.score += this.#randomNumber()
+  }
+
+  takeDamage() {
+    this.health -= this.#randomNumber()
   }
 
   #randomNumber() {
