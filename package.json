@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint ./src/lib",
     "test": "jest -i --verbose --coverage --runInBand",
-    "start": "node index.js",
+    "start": "node ./src/lib/server.js",
     "dboff": "killall mongod",
     "watch": "nodemon index.js",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db"
