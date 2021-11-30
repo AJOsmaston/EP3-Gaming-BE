@@ -1,0 +1,38 @@
+{
+  "name": "ep3-gaming-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ./",
+    "test": "jest -i --verbose --coverage --runInBand",
+    "start": "node index.js",
+    "dboff": "killall mongod",
+    "watch": "nodemon index.js",
+    "dbon": "mkdir -p ./db && mongod --dbpath ./db"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AJOsmaston/EP3-Gaming-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AJOsmaston/EP3-Gaming-BE/issues"
+  },
+  "homepage": "https://github.com/AJOsmaston/EP3-Gaming-BE#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.1",
+    "mongoose": "^6.0.14",
+    "superagent": "^6.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "jest": "^27.4.1"
+  }
+}
