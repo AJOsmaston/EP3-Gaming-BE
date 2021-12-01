@@ -27,5 +27,4 @@ router.get("/turn", (req, res, next) => {
   res.status(200).json({ score: score, health: health, isDead: isDead })
 })
 
-
 module.exports = router;
