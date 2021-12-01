@@ -28,11 +28,15 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "http-errors": "^1.8.1",
-    "mongoose": "^6.0.14",
-    "superagent": "^6.1.0"
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.0.14"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^8.3.0",
-    "jest": "^27.4.1"
+    "jest": "^27.4.2",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.6"
   }
 }
