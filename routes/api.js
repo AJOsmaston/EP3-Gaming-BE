@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   res.send("Hello World")
 });
 
-router.get("/startGame", (req, res, next) => {
+router.get("/start-game", (req, res, next) => {
   newGame = new Game;
 
   let score = newGame.score
