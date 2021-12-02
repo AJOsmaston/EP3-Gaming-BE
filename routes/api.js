@@ -13,8 +13,8 @@ router.get("/", (req, res) => {
 
 router.post("/signup", (req, res, next) => {
   const user = new UserModel({
-    username: "Kostas",
-    password: "123456"
+    username: req.body.username,
+    password: req.body.password
   })
   
   user.save()
