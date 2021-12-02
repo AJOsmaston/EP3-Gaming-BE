@@ -1,9 +1,9 @@
 const express = require("express");
-// const { Db } = require("mongodb");
 const Game = require("../src/lib/game");
 const router = express.Router();
 const Scoreboard = require('../models/scoreboard')
 const UserModel = require('../models/user')
+const passport = require('passport');
 
 
 router.get("/", (req, res) => {
@@ -26,6 +26,30 @@ router.post("/signup", (req, res, next) => {
        console.error(err)
      })
   res.json(req.body); // What do we return?
+})
+
+router.post("/login", 
+passport.authenticate('local', 
+{ 
+  successRedirect: '/start-game',
+  failureRedirect: '/login' 
+}), (req, res, next) => {
+  req.session.save((err) => {
+      if (err) {
+          return next(err);
+      }
+      res.redirect('/');
+  })
+})
+
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  req.session.save((err) => {
+      if (err) {
+          return next(err);
+      }
+      res.redirect('/');
+  });
 })
 
 // GAME ROUTES ----------------------------------

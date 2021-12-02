@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const routes = require('../../routes/api');
 require('dotenv').config();
 const Database = require('./database');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+var cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -15,6 +18,21 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use(require('express-session')({
+  secret: process.env.APP_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport config
+var Account = require('../../models/user');
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 app.use(routes);
 
