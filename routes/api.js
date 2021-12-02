@@ -1,7 +1,9 @@
-const { response } = require("express");
+// const { response } = require("express");
 const express = require("express");
+// const { Db } = require("mongodb");
 const Game = require("../src/lib/game");
 const router = express.Router();
+const UserModel = require('../models/user')
 
 router.get("/", (req, res) => {
   res.send("Hello World")
@@ -10,11 +12,23 @@ router.get("/", (req, res) => {
 // USER ROUTES ----------------------------------
 
 router.post("/signup", (req, res, next) => {
-  console.log(req.body.username); // Now the username and password from the body need to go to the db
+  const user = new UserModel({
+    username: "Kostas",
+    password: "123456"
+  })
+  
+  user.save()
+     .then(doc => {
+       console.log(doc)
+     })
+     .catch(err => {
+       console.error(err)
+     })
   res.json(req.body); // What do we return?
 })
 
 // GAME ROUTES ----------------------------------
+
 router.get("/startGame", (req, res, next) => {
   newGame = new Game;
 
