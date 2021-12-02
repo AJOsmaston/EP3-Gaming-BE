@@ -1,10 +1,33 @@
+// const { response } = require("express");
 const express = require("express");
+// const { Db } = require("mongodb");
 const Game = require("../src/lib/game");
 const router = express.Router();
+const UserModel = require('../models/user')
 
 router.get("/", (req, res) => {
   res.send("Hello World")
 });
+
+// USER ROUTES ----------------------------------
+
+router.post("/signup", (req, res, next) => {
+  const user = new UserModel({
+    username: req.body.username,
+    password: req.body.password
+  })
+  
+  user.save()
+     .then(doc => {
+       console.log(doc)
+     })
+     .catch(err => {
+       console.error(err)
+     })
+  res.json(req.body); // What do we return?
+})
+
+// GAME ROUTES ----------------------------------
 
 router.get("/start-game", (req, res, next) => {
   newGame = new Game;
