@@ -13,19 +13,11 @@ router.get("/", (req, res) => {
 // USER ROUTES ----------------------------------
 
 router.post("/signup", (req, res, next) => {
-  const user = new UserModel({
-    username: req.body.username,
-    password: req.body.password
+  UserModel.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
+    if (err) {
+      return res.render('register', { error : err.message });
+    }
   })
-  
-  user.save()
-     .then(doc => {
-       console.log(doc)
-     })
-     .catch(err => {
-       console.error(err)
-     })
-  res.json(req.body); // What do we return?
 })
 
 router.post("/login", 
