@@ -15,7 +15,8 @@ router.post("/signup", (req, res, next) => {
 })
 
 // GAME ROUTES ----------------------------------
-router.get("/startGame", (req, res, next) => {
+
+router.get("/start-game", (req, res, next) => {
   newGame = new Game;
 
   let score = newGame.score
