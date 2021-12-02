@@ -1,4 +1,3 @@
-// const { response } = require("express");
 const express = require("express");
 // const { Db } = require("mongodb");
 const Game = require("../src/lib/game");
