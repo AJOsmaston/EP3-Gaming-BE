@@ -1,5 +1,4 @@
 const express = require("express");
-// const { Db } = require("mongodb");
 const Game = require("../src/lib/game");
 const router = express.Router();
 const Scores = require('../models/scores')
@@ -64,9 +63,11 @@ router.get("/commit-score", (req, res) => {
 })
 
 router.get("/scoreboard", (req, res) => {
+  const displayTenScore = async () => {
+    const sortedScores = await Scores.find().sort({ score: -1 }).limit(10)
+    res.status(200).json(sortedScores)
+  }
   displayTenScore();
-
-  res.status(200).json({})
 })
 
 module.exports = router;
