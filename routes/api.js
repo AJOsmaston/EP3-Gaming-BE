@@ -28,7 +28,7 @@ router.get("/turn", (req, res, next) => {
   res.status(200).json({ score: score, health: health, isDead: isDead })
 })
 
-router.get("/scoreboard", (req, res, next) => {
+router.get("/commit-score", (req, res, next) => {
 
   res.send('attempting to post something to mongodb');
 
