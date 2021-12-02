@@ -13,11 +13,7 @@ router.get("/", (req, res) => {
 // USER ROUTES ----------------------------------
 
 router.post("/signup", (req, res, next) => {
-  UserModel.register(new Account({ username : req.body.username }), req.body.password, (err, account) => {
-    if (err) {
-      return res.render('register', { error : err.message });
-    }
-  })
+  UserModel.register(new Account({ username : req.body.username, password : req.body.password }), req.body.password)
 })
 
 router.post("/login", 
