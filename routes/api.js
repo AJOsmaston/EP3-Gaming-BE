@@ -2,8 +2,9 @@ const express = require("express");
 // const { Db } = require("mongodb");
 const Game = require("../src/lib/game");
 const router = express.Router();
-const Scoreboard = require('../models/scoreboard')
-const UserModel = require('../models/user')
+const Scores = require('../models/scores')
+const UserModel = require('../models/user');
+const displayTenScore = require("../src/lib/scoreboard/displayTenScore");
 
 
 router.get("/", (req, res) => {
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
 
 // USER ROUTES ----------------------------------
 
-router.post("/signup", (req, res, next) => {
+router.post("/signup", (req, res) => {
   const user = new UserModel({
     username: req.body.username,
     password: req.body.password
@@ -25,12 +26,12 @@ router.post("/signup", (req, res, next) => {
      .catch(err => {
        console.error(err)
      })
-  res.json(req.body); // What do we return?
+  res.json(req.body); // What do we return? Some sort of user session?
 })
 
 // GAME ROUTES ----------------------------------
 
-router.get("/start-game", (req, res, next) => {
+router.get("/start-game", (req, res) => {
   newGame = new Game;
 
   let score = newGame.score
@@ -40,7 +41,7 @@ router.get("/start-game", (req, res, next) => {
   res.status(200).json({ score: score, health: health, isDead: isDead })
 })
 
-router.get("/turn", (req, res, next) => {
+router.get("/turn", (req, res) => {
   newGame.attack();
   newGame.takeDamage();
 
@@ -51,27 +52,21 @@ router.get("/turn", (req, res, next) => {
   res.status(200).json({ score: score, health: health, isDead: isDead })
 })
 
-router.get("/commit-score", (req, res, next) => {
-
-  res.send('attempting to post something to mongodb');
-
+router.get("/commit-score", (req, res) => {
   const addScore = async () => {
-    
-    const newScore = new Scoreboard({ score: newGame.score })
+    const newScore = new Scores({ score: newGame.score })
     await newScore.save()
     console.log(`saved ${newScore}`)
-    
-   
   };
+  addScore();
 
-  addScore()
-  
-
- 
-
-  //createAndSaveScoreboard()
-
+  res.status(200).json({ score: newGame.score })
 })
 
+router.get("/scoreboard", (req, res) => {
+  displayTenScore();
+
+  res.status(200).json({})
+})
 
 module.exports = router;
