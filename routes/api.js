@@ -1,7 +1,7 @@
 const express = require("express");
 const Game = require("../src/lib/game");
 const router = express.Router();
-const Scoreboard = require("../models/scoreboard");
+const Scores = require("../models/scores");
 const UserModel = require("../models/user");
 const passport = require("passport");
 
@@ -53,7 +53,7 @@ router.post("/login", (req, res) => {
 
 // GAME ROUTES ----------------------------------
 
-router.get("/start-game", (req, res, next) => {
+router.get("/start-game", (req, res) => {
   newGame = new Game();
 
   let score = newGame.score;
@@ -63,7 +63,7 @@ router.get("/start-game", (req, res, next) => {
   res.status(200).json({ score: score, health: health, isDead: isDead });
 });
 
-router.get("/turn", (req, res, next) => {
+router.get("/turn", (req, res) => {
   newGame.attack();
   newGame.takeDamage();
 
@@ -74,11 +74,11 @@ router.get("/turn", (req, res, next) => {
   res.status(200).json({ score: score, health: health, isDead: isDead });
 });
 
-router.get("/commit-score", (req, res, next) => {
+router.get("/commit-score", (req, res) => {
   res.send("attempting to post something to mongodb");
 
   const addScore = async () => {
-    const newScore = new Scoreboard({ score: newGame.score });
+    const newScore = new Scores({ score: newGame.score });
     await newScore.save();
     console.log(`saved ${newScore}`);
   };
