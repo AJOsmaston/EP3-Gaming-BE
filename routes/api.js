@@ -71,21 +71,26 @@ router.get("/turn", (req, res) => {
   let health = newGame.health;
   let isDead = newGame.checkDead();
 
-  res.status(200).json({ score: score, health: health, isDead: isDead });
-});
+  res.status(200).json({ score: score, health: health, isDead: isDead })
+})
 
 router.get("/commit-score", (req, res) => {
-  res.send("attempting to post something to mongodb");
-
   const addScore = async () => {
-    const newScore = new Scores({ score: newGame.score });
-    await newScore.save();
-    console.log(`saved ${newScore}`);
+    const newScore = new Scores({ score: newGame.score })
+    await newScore.save()
+    console.log(`saved ${newScore}`)
   };
-
   addScore();
 
-  //createAndSaveScoreboard()
-});
+  res.status(200).json({ score: newGame.score })
+})
+
+router.get("/scoreboard", (req, res) => {
+  const displayTenScore = async () => {
+    const sortedScores = await Scores.find().sort({ score: -1 }).limit(10)
+    res.status(200).json(sortedScores)
+  }
+  displayTenScore();
+})
 
 module.exports = router;
