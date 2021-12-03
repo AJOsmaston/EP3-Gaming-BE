@@ -9,7 +9,7 @@ class Game {
   }
 
   takeDamage() {
-    this.health -= this.#randomNumber();
+    this.health < this.#randomNumber() ? this.health -= this.health : this.health -= this.#randomNumber()
   }
 
   checkDead() {

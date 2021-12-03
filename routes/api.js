@@ -3,7 +3,7 @@ const Game = require("../src/lib/game");
 const router = express.Router();
 const Scores = require('../models/scores')
 const UserModel = require('../models/user');
-const displayTenScore = require("../src/lib/scoreboard/displayTenScore");
+// const displayTenScore = require("../src/lib/scoreboard/displayTenScore");
 
 
 router.get("/", (req, res) => {
