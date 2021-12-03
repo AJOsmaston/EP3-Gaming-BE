@@ -12,32 +12,44 @@ router.get("/", (req, res) => {
 
 // USER ROUTES ----------------------------------
 
-router.post("/signup", (req, res, next) => {
-  UserModel.register(new Account({ username : req.body.username, password : req.body.password }), req.body.password)
-})
-
-router.post("/login", 
-passport.authenticate('local', 
-{ 
-  successRedirect: '/start-game',
-  failureRedirect: '/login' 
-}), (req, res, next) => {
-  req.session.save((err) => {
-      if (err) {
-          return next(err);
-      }
-      res.redirect('/');
-  })
-})
-
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  req.session.save((err) => {
-      if (err) {
-          return next(err);
-      }
-      res.redirect('/');
+router.post("/signup", (req, res) => {
+  Users=new UserModel({username : req.body.username});
+  
+  UserModel.register(Users, req.body.password, function(err, user) {
+    if (err) {
+      res.json({success:false, message:"Your account could not be saved. Error: ", err}) 
+    }else{
+      res.json({success: true, message: "Your account has been saved"})
+    }
   });
+})
+
+router.post("/login", (req, res) => {
+  if(!req.body.username){
+    res.json({success: false, message: "Username was not given"})
+  } else {
+    if(!req.body.password){
+      res.json({success: false, message: "Password was not given" })
+    }else{
+      passport.authenticate('local', function (err, user, info) { 
+        if(err){
+          res.json({success: false, message: err})
+        } else{
+          if (!user) {
+            res.json({success: false, message: 'username or password incorrect'})
+          } else{
+            req.login(user, function(err){
+              if(err){
+                res.json({success: false, message: err})
+              }else{
+                res.json({success: true, message:"Authentication successful", user: req.user.id });
+              }
+            })
+          }
+        }
+      })(req, res);
+    }
+  }
 })
 
 // GAME ROUTES ----------------------------------

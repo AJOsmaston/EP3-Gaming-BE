@@ -29,10 +29,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // passport config
-var Account = require('../../models/user');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+var User = require('../../models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use(routes);
 
