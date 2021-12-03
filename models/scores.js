@@ -5,6 +5,6 @@ const ScoreSchema = new Schema({
   score: Number
 })
 
-const Scores = mongoose.model("Scoreboard", ScoreSchema)
+const Scores = mongoose.model("scores", ScoreSchema)
 
 module.exports = Scores;
