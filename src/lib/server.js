@@ -8,10 +8,14 @@ const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
+const morgan = require('morgan')
 
 const app = express();
 
+
 const port = process.env.PORT || 5000;
+
+app.use(morgan('combined'))
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
