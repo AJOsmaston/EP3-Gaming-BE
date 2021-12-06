@@ -5,9 +5,22 @@ const Scores = require("../models/scores");
 const UserModel = require("../models/user");
 const passport = require("passport");
 
+const isAuth = (req, res, next) => {
+  if(req.session.isAuth){
+    next();
+  }else{
+    res.redirect("/home");
+  }
+}
+
 router.get("/", (req, res) => {
   res.send("Hello World");
+  console.log(req.session)
 });
+
+router.get("/home", (req, res) => {
+  res.send("Hello World");
+})
 
 // USER ROUTES ----------------------------------
 
@@ -41,7 +54,8 @@ router.post("/login", (req, res) => {
               if(err){
                 res.json({success: false, message: err})
               }else{
-                res.json({success: true, message:"Authentication successful", user: req.user.id });
+                req.session.isAuth = true;
+                res.json({ success: true })
               }
             })
           }
@@ -53,7 +67,7 @@ router.post("/login", (req, res) => {
 
 // GAME ROUTES ----------------------------------
 
-router.get("/start-game", (req, res) => {
+router.get("/start-game", isAuth, (req, res) => {
   newGame = new Game();
 
   let score = newGame.score;
@@ -63,7 +77,7 @@ router.get("/start-game", (req, res) => {
   res.status(200).json({ score: score, health: health, isDead: isDead });
 });
 
-router.get("/turn", (req, res) => {
+router.get("/turn", isAuth, (req, res) => {
   newGame.attack();
   newGame.takeDamage();
 
