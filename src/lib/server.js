@@ -5,7 +5,9 @@ require('dotenv').config();
 const Database = require('./database');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-var cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoDBSession = require('connect-mongodb-session')(session);
 
 const app = express();
 
@@ -20,13 +22,21 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(require('express-session')({
-  secret: process.env.APP_SECRET,
+const store = new MongoDBSession({
+  uri: process.env.DB,
+  collection: 'mySessions'
+})
+
+app.use(session({
+  secret: 'key that will sign cookie',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: store,
 }));
+
 app.use(passport.initialize());
-app.use(passport.session());
+
+// app.use(passport.session());
 
 // passport config
 var User = require('../../models/user');
