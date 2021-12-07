@@ -9,7 +9,7 @@ const isAuth = (req, res, next) => {
   if(req.session.isAuth){
     next();
   }else{
-    res.redirect("/");
+    res.status(401).json({ message: "Not Authorised"})
   }
 }
 
@@ -66,8 +66,8 @@ router.get('/user-name', isAuth, (req, res) => {
 })
 
 router.get('/logout', isAuth, (req, res) => {
-  res.clearCookie('connect.sid');
-  res.redirect('/')
+  res.clearCookie('key that will sign cookie');
+  res.status(200).json({success: true, message: "Successfully logged out"})
 })
 
 // GAME ROUTES ----------------------------------
