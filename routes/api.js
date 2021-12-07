@@ -9,7 +9,7 @@ const isAuth = (req, res, next) => {
   if(req.session.isAuth){
     next();
   }else{
-    res.redirect("/home");
+    res.redirect("/");
   }
 }
 
@@ -17,10 +17,6 @@ router.get("/", (req, res) => {
   res.send("Hello World");
   console.log(req.session)
 });
-
-router.get("/home", (req, res) => {
-  res.send("Hello World");
-})
 
 // USER ROUTES ----------------------------------
 
@@ -67,6 +63,11 @@ router.post("/login", (req, res) => {
 
 router.get('/user-name', isAuth, (req, res) => {
     res.status(200).json({ success: true, username: req.session.passport.user})
+})
+
+router.get('/logout', isAuth, (req, res) => {
+  res.clearCookie('connect.sid');
+  res.redirect('/')
 })
 
 // GAME ROUTES ----------------------------------
