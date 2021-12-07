@@ -65,9 +65,13 @@ router.post("/login", (req, res) => {
   }
 })
 
+router.get('/user-name', isAuth, (req, res) => {
+    res.status(200).json({ success: true, username: req.session.passport.user})
+})
+
 // GAME ROUTES ----------------------------------
 
-router.get("/start-game", isAuth, (req, res) => {
+router.get("/start-game", (req, res) => {
   newGame = new Game();
 
   let score = newGame.score;
@@ -77,7 +81,7 @@ router.get("/start-game", isAuth, (req, res) => {
   res.status(200).json({ score: score, health: health, isDead: isDead });
 });
 
-router.get("/turn", isAuth, (req, res) => {
+router.get("/turn", (req, res) => {
   newGame.attack();
   newGame.takeDamage();
 
@@ -88,7 +92,7 @@ router.get("/turn", isAuth, (req, res) => {
   res.status(200).json({ score: score, health: health, isDead: isDead })
 })
 
-router.get("/commit-score", (req, res) => {
+router.get("/commit-score", isAuth, (req, res) => {
   const addScore = async () => {
     const newScore = new Scores({ user: req.session.passport.user, score: newGame.score })
     await newScore.save()
