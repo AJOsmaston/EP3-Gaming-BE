@@ -90,13 +90,13 @@ router.get("/turn", isAuth, (req, res) => {
 
 router.get("/commit-score", (req, res) => {
   const addScore = async () => {
-    const newScore = new Scores({ score: newGame.score })
+    const newScore = new Scores({ user: req.session.passport.user, score: newGame.score })
     await newScore.save()
     console.log(`saved ${newScore}`)
   };
   addScore();
 
-  res.status(200).json({ score: newGame.score })
+  res.status(200).json({ user: req.session.passport.user, score: newGame.score })
 })
 
 router.get("/scoreboard", (req, res) => {
