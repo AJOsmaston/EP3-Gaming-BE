@@ -65,6 +65,10 @@ router.post("/login", (req, res) => {
   }
 })
 
+router.get('/user-name', isAuth, (req, res) => {
+    res.status(200).json({ success: true, username: req.session.passport.user})
+})
+
 // GAME ROUTES ----------------------------------
 
 router.get("/start-game", isAuth, (req, res) => {
