@@ -9,7 +9,7 @@ const isAuth = (req, res, next) => {
   if(req.session.isAuth){
     next();
   }else{
-    res.redirect("/home");
+    res.status(401).json({ message: "Not Authorised"})
   }
 }
 
@@ -18,10 +18,6 @@ router.get("/", (req, res) => {
   console.log(req.session)
 });
 
-router.get("/home", (req, res) => {
-  res.send("Hello World");
-})
-
 // USER ROUTES ----------------------------------
 
 router.post("/signup", (req, res) => {
@@ -29,9 +25,9 @@ router.post("/signup", (req, res) => {
   
   UserModel.register(Users, req.body.password, function(err, user) {
     if (err) {
-      res.json({success:false, message:"Your account could not be saved. Error: ", err}) 
+      res.json({success: false, message:"Your account could not be saved. Error: ", err}) 
     }else{
-      res.json({success: true, message: "Your account has been saved"})
+      res.json({success: true, message: "Your account has been saved, please log in to continue"})
     }
   });
 })
@@ -65,8 +61,12 @@ router.post("/login", (req, res) => {
   }
 })
 
-router.get('/user-name', isAuth, (req, res) => {
+router.get('/user-name', (req, res) => {
     res.status(200).json({ success: true, username: req.session.passport.user})
+})
+
+router.post('/logout', isAuth, (req, res) => {
+  req.session.destroy();
 })
 
 // GAME ROUTES ----------------------------------
