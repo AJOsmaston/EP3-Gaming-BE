@@ -92,6 +92,17 @@ router.get("/turn", (req, res) => {
   res.status(200).json({ score: score, health: health, isDead: isDead })
 })
 
+router.get("/turn-more-damage", (req, res) => {
+  newGame.takeDamage();
+  newGame.takeDamage();
+
+  let score = newGame.score;
+  let health = newGame.health;
+  let isDead = newGame.checkDead();
+
+  res.status(200).json({ score: score, health: health, isDead: isDead })
+})
+
 router.get("/commit-score", isAuth, (req, res) => {
   const addScore = async () => {
     const newScore = new Scores({ user: req.session.passport.user, score: newGame.score })
