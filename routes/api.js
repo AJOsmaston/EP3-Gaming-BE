@@ -65,9 +65,8 @@ router.get('/user-name', isAuth, (req, res) => {
     res.status(200).json({ success: true, username: req.session.passport.user})
 })
 
-router.get('/logout', isAuth, (req, res) => {
-  res.clearCookie('key that will sign cookie');
-  res.status(200).json({success: true, message: "Successfully logged out"})
+router.post('/logout', isAuth, (req, res) => {
+  req.session.destroy();
 })
 
 // GAME ROUTES ----------------------------------
