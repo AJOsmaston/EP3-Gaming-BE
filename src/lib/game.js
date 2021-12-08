@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     this.score = 0; //player score
-    this.health = 100; //player health
+    this.health = 1000; //player health
   }
 
   attack() {
