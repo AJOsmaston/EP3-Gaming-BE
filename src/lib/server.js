@@ -12,13 +12,11 @@ const morgan = require('morgan')
 
 const app = express();
 
-
 const port = process.env.PORT || 5000;
 
-app.use(morgan('combined'))
-
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://makersep3gamefrontend.herokuapp.com');
+  res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
@@ -31,11 +29,18 @@ const store = new MongoDBSession({
   collection: 'mySessions'
 })
 
+app.enable('trust proxy');
+
 app.use(session({
   secret: 'key that will sign cookie',
   resave: false,
   saveUninitialized: false,
   store: store,
+  proxy : true,
+  cookie: {
+    secure : true,
+    sameSite: 'none',
+  }
 }));
 
 app.use(passport.initialize());
