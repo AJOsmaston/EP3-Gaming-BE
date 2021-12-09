@@ -51,7 +51,7 @@ router.post("/login", (req, res) => {
                 res.json({success: false, message: err})
               }else{
                 req.session.isAuth = true;
-                res.json({ success: true })
+                res.json({ success: true, message: 'successfully logged in'})
               }
             })
           }
