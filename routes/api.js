@@ -25,7 +25,7 @@ router.post("/signup", (req, res) => {
   
   UserModel.register(Users, req.body.password, function(err, user) {
     if (err) {
-      res.json({success: false, message:"Your account could not be saved. Error: ", err}) 
+      res.json({success: false, message:"Your account could not be saved", err}) 
     }else{
       res.json({success: true, message: "Your account has been saved, please log in to continue"})
     }
