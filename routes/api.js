@@ -67,6 +67,7 @@ router.get('/user-name', (req, res) => {
 
 router.post('/logout', isAuth, (req, res) => {
   req.session.destroy();
+  res.status(200).json({success: true, message: "successfully logged out"})
 })
 
 // GAME ROUTES ----------------------------------
