@@ -25,7 +25,7 @@ router.post("/signup", (req, res) => {
   
   UserModel.register(Users, req.body.password, function(err, user) {
     if (err) {
-      res.json({success: false, message:"Your account could not be saved. Error: ", err}) 
+      res.json({success: false, message:"Your account could not be saved", err}) 
     }else{
       res.json({success: true, message: "Your account has been saved, please log in to continue"})
     }
@@ -51,7 +51,7 @@ router.post("/login", (req, res) => {
                 res.json({success: false, message: err})
               }else{
                 req.session.isAuth = true;
-                res.json({ success: true })
+                res.json({ success: true, message: 'successfully logged in'})
               }
             })
           }
@@ -67,6 +67,7 @@ router.get('/user-name', (req, res) => {
 
 router.post('/logout', isAuth, (req, res) => {
   req.session.destroy();
+  res.status(200).json({success: true, message: "successfully logged out"})
 })
 
 // GAME ROUTES ----------------------------------
