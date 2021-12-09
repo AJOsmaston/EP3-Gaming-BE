@@ -95,6 +95,9 @@ router.get("/turn", (req, res) => {
 router.get("/turn-more-damage", (req, res) => {
   newGame.takeDamage();
   newGame.takeDamage();
+  newGame.takeDamage();
+  newGame.takeDamage();
+  newGame.takeDamage();
 
   let score = newGame.score;
   let health = newGame.health;
