@@ -15,7 +15,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://makersep3gamefrontend.herokuapp.com');
+  res.header('Access-Control-Allow-Origin', 'https://life-of-bernard.herokuapp.com');
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
