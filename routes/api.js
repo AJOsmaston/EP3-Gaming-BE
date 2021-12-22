@@ -14,8 +14,8 @@ const isAuth = (req, res, next) => {
 }
 
 router.get("/", (req, res) => {
-  res.send("Hello World");
-  console.log(req.session)
+  res.send("Hello this is backend");
+  res.json({success: true})
 });
 
 // USER ROUTES ----------------------------------
