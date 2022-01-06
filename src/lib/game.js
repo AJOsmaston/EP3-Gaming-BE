@@ -18,7 +18,7 @@ class Game {
   }
 
   checkDead() {
-    return this.health <= 0 ? true : false
+    return this.health === 0;
   }
 
   #randomAttack() {
