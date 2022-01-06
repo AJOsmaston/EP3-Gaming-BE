@@ -12,8 +12,6 @@ const MongoDBSession = require('connect-mongodb-session')(session);
 const app = express();
 const port = process.env.PORT || 3000;
 
-console.log(process.env.ENVIRONMENT === 'DEPLOY')
-
 if (process.env.ENVIRONMENT === 'DEPLOY') {
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://life-of-bernard.herokuapp.com');
