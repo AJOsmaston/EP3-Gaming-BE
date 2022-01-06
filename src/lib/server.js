@@ -14,8 +14,8 @@ const port = process.env.PORT || 3000;
 if (process.env.ENVIRONMENT === 'DEPLOY') {
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://life-of-bernard.herokuapp.com');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
   });
 } else if (process.env.ENVIRONMENT === 'DEVELOPMENT') {
