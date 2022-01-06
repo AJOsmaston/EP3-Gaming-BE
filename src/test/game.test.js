@@ -45,6 +45,7 @@ describe('Game', () => {
 
     it('health does not go below 0', () => {
       this.newGame.killPlayer();
+      jest.spyOn(global.Math, 'random').mockReturnValue(1);
       this.newGame.takeDamage();
 
       expect(this.newGame.health).toBe(0);
