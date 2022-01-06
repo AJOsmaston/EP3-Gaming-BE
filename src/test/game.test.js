@@ -43,6 +43,12 @@ describe('Game', () => {
       expect(this.newGame.health).toBe(995);
     });
 
+    it('health does not go below 0', () => {
+      this.newGame.killPlayer();
+      this.newGame.takeDamage();
+
+      expect(this.newGame.health).toBe(0);
+    });
   });
 
   describe('#killPlayer', () => {
