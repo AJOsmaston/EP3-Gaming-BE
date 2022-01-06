@@ -1,6 +1,5 @@
 const Game = require('../lib/game');
 
-
 describe('Game', () => {
 
   beforeEach(() => {
@@ -33,9 +32,10 @@ describe('Game', () => {
   describe('#damage', () => {
 
     it('decreases player health', () => {
+      let maxHealth = 1000;
       this.newGame.takeDamage();
   
-      expect(this.newGame.health).toBeLessThan(100);
+      expect(this.newGame.health).toBeLessThan(maxHealth);
     })
 
     it('decreases players health by a random amount', () => {
