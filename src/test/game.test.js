@@ -28,9 +28,7 @@ describe('Game', () => {
     });
   });
 
-
-  describe('#damage', () => {
-
+  describe('#takeDamage', () => {
     it('decreases player health', () => {
       let maxHealth = 1000;
       this.newGame.takeDamage();
@@ -47,14 +45,24 @@ describe('Game', () => {
 
   });
 
+  describe('#killPlayer', () => {
+    it('Kills the player', () => {
+      this.newGame.killPlayer();
+
+      expect(this.newGame.health).toBe(0);
+    })
+  })
+
   describe('#checkDead', () => {
     it('returns false if health > 0', () => {
       expect(this.newGame.checkDead()).toBe(false);
     });
 
-    it('returns true if health <= 0', () => {
+    it('returns true if health = 0', () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(1);
-      this.newGame.takeDamage();
+      for (let i = 0; i < 40; i++) {
+        this.newGame.takeDamage();
+      }      
 
       expect(this.newGame.health).toBe(0);
       expect(this.newGame.checkDead()).toBe(true);
