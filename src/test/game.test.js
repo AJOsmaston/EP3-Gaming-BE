@@ -42,7 +42,7 @@ describe('Game', () => {
       jest.spyOn(global.Math, 'random').mockReturnValue(0.2);
       this.newGame.takeDamage();
 
-      expect(this.newGame.health).toBe(80);
+      expect(this.newGame.health).toBe(995);
     });
 
   });
