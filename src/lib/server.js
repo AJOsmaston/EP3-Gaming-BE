@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('../../routes/api');
-require('dotenv').config();
 const Database = require('./database');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -9,38 +8,55 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 
+require('dotenv').config();
+
 const app = express();
 
 const port = process.env.PORT || 3000;
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://life-of-bernard.herokuapp.com');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+if (process.env.ENVIRONMENT === 'DEPLOY') {
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://life-of-bernard.herokuapp.com');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+  });
+} else if (process.env.ENVIRONMENT === 'DEVELOPMENT') {
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+} else {
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+}
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 const store = new MongoDBSession({
   uri: process.env.DB,
-  collection: 'mySessions'
+  collection: process.env.COLLECTIONS
 })
 
-app.enable('trust proxy');
-
-app.use(session({
-  secret: 'ec9907ebed0c4246f64038078ef69be42a86ad54',
-  resave: false,
-  saveUninitialized: false,
-  store: store,
-  proxy : true,
-  cookie: {
-    secure : true,
-    sameSite: 'none',
-  }
-}));
+if (process.env.ENVIRONMENT === 'DEPLOY') {
+  app.enable('trust proxy');
+  app.use(session({
+    proxy : true,
+    cookie: {
+      secure : true,
+      sameSite: 'none',
+    }
+  }));
+} else {
+  app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  }));
+}
 
 app.use(passport.initialize());
 
