@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 
-require('dotenv').config();
 
 const app = express();
 
