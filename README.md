@@ -41,7 +41,10 @@
 * Insert the following {fill in these options}:
 ```
 DB={Connection string for mongoDB database}
-PORT={Specify a port here: by default it will run on 5000}
+PORT={Specify a port here: by default it will run on 3000}
+ENVIRONMENT={'DEVELOPMENT'/'DEPLOY'}
+SECRET={secret key to sign cookies - suggest generating with crypto.randomBytes(20).toString("hex") }
+COLLECTIONS={name of mongoDB collection to store sessions}
 ```
 * Run the server  
 `npm start`  
