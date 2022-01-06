@@ -32,7 +32,7 @@ const store = new MongoDBSession({
 })
 
 app.use(session({
-  secret: 'key that will sign cookie',
+  secret: 'ec9907ebed0c4246f64038078ef69be42a86ad54',
   resave: false,
   saveUninitialized: false,
   store: store,
