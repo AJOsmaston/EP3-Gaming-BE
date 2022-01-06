@@ -3,8 +3,19 @@
   <h2>Engineering Project 3 - Gaming - Back-End</h2>
   <h3> AKA Life of Bernard </h3>
 
-[Tech Stack](#stack) | [Setup](#setup) | [Tests and code coverage](#test)
+| [Contributors](#contributors) | [Tech Stack](#stack) | [Setup](#setup) | [Tests and code coverage](#test) |
 </div>
+
+## <a name="contributors">Contributors</a>
+
+| Name | Github |
+| -- | -- |
+| Anthony Osmaston | https://github.com/AJOsmaston |
+| Bernard Leanse | https://github.com/bernardleanse |
+| Jacob Cho | https://github.com/jtc27 |
+| Kostas Ntanos | https://github.com/Kntanos |
+| Marianne Azzopardi | https://github.com/marazzo |
+| Serena Bertozzi | https://github.com/serenabertozzi |
 
 ## <a name="stack">Tech Stack</a>
 
