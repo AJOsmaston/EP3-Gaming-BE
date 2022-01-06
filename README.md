@@ -3,7 +3,7 @@
   <h2>Engineering Project 3 - Gaming - Back-End</h2>
   <h3> AKA Life of Bernard </h3>
 
-[Tech Stack](#stack) | [Setup](#setup)
+[Tech Stack](#stack) | [Setup](#setup) | [Tests and code coverage](#test)
 </div>
 
 ## <a name="stack">Tech Stack</a>
@@ -37,4 +37,12 @@ PORT={Specify a port here: by default it will run on 5000}
 
 On success, you should see:  
 
-![alt text](/media/d6da46c398659cd88f0950e7d63744e7.png)
+![server running](/media/d6da46c398659cd88f0950e7d63744e7.png)
+
+## <a name="test">Tests and Coverage</a>
+
+* To run jest for game coverage:  
+`npm run test`  
+
+![Test coverage](/media/954c8c414db4fd8a220007c9bf879f1c.png)
+<!-- TODO: add tests for API endpoints -->
