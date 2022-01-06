@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('../../routes/api');
+require('dotenv').config();
 const Database = require('./database');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
