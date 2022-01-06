@@ -14,8 +14,7 @@ class Game {
   }
 
   killPlayer() {
-    let hit = this.#destroy()
-    this.health < hit ? this.health -= this.health : this.health -= hit
+    this.health = 0;
   }
 
   checkDead() {
@@ -28,10 +27,6 @@ class Game {
 
   #randomDamage() {
     return Math.floor(Math.random()*25);
-  }
-
-  #destroy() {
-    return 1000000000000;
   }
 
 }
