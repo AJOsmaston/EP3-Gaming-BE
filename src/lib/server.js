@@ -44,8 +44,6 @@ app.use(session({
 
 app.use(passport.initialize());
 
-// app.use(passport.session());
-
 // passport config
 var User = require('../../models/user');
 passport.use(new LocalStrategy(User.authenticate()));
